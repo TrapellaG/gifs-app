@@ -15,7 +15,6 @@ export const PreviousSearches: FC<Props> = ({ searches, onLabelClick }) => {
             {search}
           </li>
         ))}
-        ;
       </ul>
     </div>
   );
