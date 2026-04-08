@@ -1,13 +1,13 @@
 import { useRef, useState } from "react";
 import type { Gif } from "../interfaces/gif.interface";
-import { mockGifs } from "../../mock-data/gifs.mock";
+//import { mockGifs } from "../../mock-data/gifs.mock";
 import { getGifsByQuery } from "../actions/get-gifs-by-query.action";
 
 //const gifsCache: Record<string, Gif[]> = {};
 
 export const useGifs = () => {
   const [previousSearches, setPreviousSearches] = useState<string[]>([]);
-  const [gifs, setGifs] = useState<Gif[]>(mockGifs);
+  const [gifs, setGifs] = useState<Gif[]>([]);
 
   const gifsCache = useRef<Record<string, Gif[]>>({});
 
@@ -18,6 +18,7 @@ export const useGifs = () => {
     }
     const gifs = await getGifsByQuery(search);
     setGifs(gifs);
+    gifsCache.current[search] = gifs;
   };
 
   const handleSearch = async (query: string) => {
